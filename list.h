@@ -22,6 +22,9 @@ node_t *mergeTwoLists(node_t *left, node_t *right)
     return result;
 }
 
+
+
+
 node_t *list_make_node_t(node_t *list, int val)
 {
     node_t *node = malloc(sizeof(node_t));
@@ -60,6 +63,18 @@ bool list_is_ordered(node_t *list)
     }
     return true;
 }
+
+void list_display(node_t *list)
+{
+    printf("%s IN ORDER : ", list_is_ordered(list) ? "   " : "NOT");
+    while (list)
+    {
+        printf("%d ", list->value);
+        list = list->next;
+    }
+    printf("\n");
+}
+
 
 void list_free(node_t **list)
 {

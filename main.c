@@ -24,7 +24,8 @@ void shuffle(int *nums, size_t n)
     }
 }
 
-void main(int argc, char **argv)
+
+int main(int argc, char **argv)
 {
     struct timespec start, end;
     srand(time(NULL));
@@ -37,7 +38,7 @@ void main(int argc, char **argv)
     const int sort_len = sizeof(sorts) / sizeof(void *);
     node_t *lists[sort_len];
     time_t measures[epochs][sort_len];
-    
+
     for (int j = 0; j < N; j++)
         nums[j] = j;
 

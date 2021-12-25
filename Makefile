@@ -8,7 +8,10 @@ build:
 run: build
 	@./$(TRG)
 	@gnuplot plot.gp
+example: 
+	@$(CC) example.c $(FLAGS) -o example
+	./example
 clean:
-	@rm -rf $(TRG) *.png *.txt
+	@rm -rf $(TRG) *.png *.txt example
 debug: build
 	gdb ./$(TRG)
