@@ -39,7 +39,35 @@ void mergesort_iter_head_tail(node_t **list)
     node_t *lists[n];
     node_t *sorted = head;
 
-    // split sorted lists
+    // split list to sorted lists
+    for (node_t *node = head, *next; node; node = next)
+    {
+        next = node->next;
+        node->next = NULL;
+        lists[listsSize++] = node;
+    }
+    
+    // merge K Lists
+    while (listsSize > 1)
+    {
+        for (int i = 0, j = listsSize - 1; i < j; i++, j--)
+            lists[i] = mergeTwoLists(lists[i], lists[j]);
+        listsSize = (listsSize + 1) >> 1;
+    }
+    *list = lists[0];
+}
+
+void mergesort_iter_interval_v2(node_t **list) {
+    node_t *head = *list;
+    if (!head || !head->next)
+        return;
+
+    int listsSize = 0;
+    const size_t n = 100000;
+    node_t *lists[n];
+    node_t *sorted = head;
+
+    // split list to sorted lists
     while (sorted)
     {
         node_t *iter = sorted;
@@ -55,16 +83,13 @@ void mergesort_iter_head_tail(node_t **list)
         iter->next = NULL;
     }
 
-    // merge K Lists
-    while (listsSize > 1)
-    {
-        for (int i = 0, j = listsSize - 1; i < j; i++, j--)
-            lists[i] = mergeTwoLists(lists[i], lists[j]);
-        listsSize = (listsSize + 1) >> 1;
-    }
+
+    for (int interval = 1; interval < listsSize; interval *= 2)
+        for (int i = 0; i + interval < listsSize; i += interval * 2)
+            lists[i] = mergeTwoLists(lists[i], lists[i + interval]);
+
     *list = lists[0];
 }
-
 void mergesort_iter_interval(node_t **list)
 {
     node_t *head = *list;
@@ -93,10 +118,8 @@ void mergesort_iter_interval(node_t **list)
     }
 
     for (int interval = 1; interval < listsSize; interval *= 2)
-    {
         for (int i = 0; i + interval < listsSize; i += interval * 2)
             lists[i] = mergeTwoLists(lists[i], lists[i + interval]);
-    }
 
     *list = lists[0];
 }

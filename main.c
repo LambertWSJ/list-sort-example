@@ -34,9 +34,10 @@ int main(int argc, char **argv)
     int interval = epochs / 10;
 
     int nums[N];
-    void (*sorts[])(node_t **) = {mergesort, mergesort_iter_head_tail, mergesort_iter_interval};
+    // void (*sorts[])(node_t **) = {mergesort, mergesort_iter_head_tail, mergesort_iter_interval};
+    void (*sorts[])(node_t **) = {mergesort_iter_interval, mergesort_iter_interval_v2};
     const int sort_len = sizeof(sorts) / sizeof(void *);
-    node_t *lists[sort_len];
+    // node_t *lists[sort_len];
     time_t measures[epochs][sort_len];
 
     for (int j = 0; j < N; j++)
@@ -49,7 +50,7 @@ int main(int argc, char **argv)
         // measure each sort methods
         for (int k = 0; k < sort_len; k++)
         {
-            node_t *list = lists[k] = NULL;
+            node_t *list = NULL;
             struct timespec start, end;
             for (int j = 0; j <= N; j++)
                 list = list_make_node_t(list, nums[j]);
@@ -59,7 +60,7 @@ int main(int argc, char **argv)
             clock_gettime(CLOCK_MONOTONIC, &end);
             assert(list_is_ordered(list));
             measures[i][k] = diff(start, end);
-            list_free(&lists[k]);
+            list_free(&list);
         }
         if ((i + 1) % interval == 0)
         {

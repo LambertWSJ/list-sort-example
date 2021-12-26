@@ -5,5 +5,6 @@ Merge-Sort benchmark
 
 `make example`: show example of each merge sort
 
-result of benchmark
+Benchmark result
+
 ![](cover.png)
