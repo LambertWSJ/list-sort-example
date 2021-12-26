@@ -25,7 +25,7 @@ int main()
     int len = sizeof(nums) / sizeof(int);
 
     void (*sorts[])(node_t **) = {mergesort, mergesort_iter_head_tail, mergesort_iter_interval};
-    char *titles[] = {"mergesort", "head-tail", "title"};
+    char *titles[] = {"mergesort", "head-tail", "interval"};
     const int sort_len = sizeof(sorts) / sizeof(void *);
     for (int i = 0; i < sort_len; i++)
     {
