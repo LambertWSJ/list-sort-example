@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -o3 -std=c99 -D_POSIX_SOURCE -D_GNU_SOURCE -fsplit-stack -g
+FLAGS = -os -std=c99 -D_POSIX_SOURCE -D_GNU_SOURCE -fsplit-stack -g
 
 TRG = bench_mark
 
